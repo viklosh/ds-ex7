@@ -1,7 +1,7 @@
 version: '3.8'
 
 services: 
-  
+  #maven builder builds from Dockerfile, it builds war file and left them alone in volume
   maven_builder:
     build: 
       context: . 
@@ -9,6 +9,13 @@ services:
       - type: volume
         source: app
         target: /app
-
+  #run from minimalistic image and mount volume contains only war file
+  tomcat:
+    image: tomcat:10.0.2-jdk8-corretto
+    volumes: 
+      - type: volume
+        source: app
+        target: /usr/local/tomcat/webapps
+#volume contains war file
 volumes: 
-  app
+  app:
