@@ -1,0 +1,14 @@
+version: '3.8'
+
+services: 
+  
+  maven_builder:
+    build: 
+      context: . 
+    volumes:
+      - type: volume
+        source: app
+        target: /app
+
+volumes: 
+  app
